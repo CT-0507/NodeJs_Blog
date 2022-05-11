@@ -1,0 +1,30 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "First Project",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --inspect index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CT-0507/NodeJs_Blog.git"
+  },
+  "keywords": [
+    "Cuong",
+    "Blog"
+  ],
+  "author": "Kuon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CT-0507/NodeJs_Blog/issues"
+  },
+  "homepage": "https://github.com/CT-0507/NodeJs_Blog#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
