@@ -1,10 +1,13 @@
 const express = require('express')
 const morgan = require('morgan')
 const handlebars = require('express-handlebars')
+const sass = require('node-sass')
 const app = express()
 const path = require('path')
 const port = 3000
 
+app.use(express.static(path.join(__dirname, 'public')))
+console.log(path.join(__dirname))
 app.use(morgan('combined'))
 //Template engine
 app.engine('hbs', handlebars.engine({

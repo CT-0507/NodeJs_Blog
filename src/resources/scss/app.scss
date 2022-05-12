@@ -1,0 +1,12 @@
+@import 'variables';
+.test {
+    font-size: 1rem;
+    background-color: red;
+    width: 20px;
+}
+h1 {
+    color: $red-color;
+}
+footer{
+    color: green;
+}
