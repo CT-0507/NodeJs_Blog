@@ -1,0 +1,89 @@
+<div class="mt-4">
+    <div>
+        <h3>My courses</h3>
+        {{#if deletedCount}}
+        <a href="/me/trashbin/courses">Trashbin ({{deletedCount}})</a>
+        {{/if}}
+    </div>
+    <table class="table mt-4">
+        <thead>
+            <tr>
+                <th scope="col">Index</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Level</th>
+                <th scope="col">Created at</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each courses}}
+            <tr>
+                <th scope="row">{{sum 1 @index}}</th>
+                <td>{{this.name}}</td>
+                <td>{{this.description}}</td>
+                <td>{{this.level}}</td>
+                <td>{{this.createdAt}}</td>
+                <td>
+                    <a href="/courses/{{this._id}}/edit" class="btn btn-link">Modify</a>
+                    <a href="" class="btn btn-link" data-toggle="modal" data-id="{{this._id}}" data-target="#delete-course-modal">Remove</a>
+                </td>
+            </tr>
+            {{else}}
+            <tr>
+                <td colspan="5" class="text-center">
+                    You don't have any courses now
+                    <a href="/courses/create">Upload a course now</a>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+{{!-- Confirm delete course --}}
+<div id="delete-course-modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Remove course?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>Are you sure you want to remove this course</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <button id="btn-delete-course" type="button" class="btn btn-danger">Delete</button>
+        </div>
+        </div>
+    </div>
+</div>
+
+{{!-- Hidden delete form --}}
+<form name="delete-course-form" method="POST">
+
+</form>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var courseId;
+
+        var deleteForm = document.forms['delete-course-form']
+        var btnDeleteCourse = document.getElementById('btn-delete-course');
+        //when dialog confirm show
+        $('#delete-course-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            courseId = button.data('id') // Extract info from data-* attributes
+        });
+
+        btnDeleteCourse.onclick = function () {
+            deleteForm.action = '/courses/' + courseId + '?_method=DELETE';
+            deleteForm.submit();
+        };
+        console.log(btnDeleteCourse)
+    });
+</script>
